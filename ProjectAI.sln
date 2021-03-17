@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "ProjectAI", "ProjectAI.phpproj", "{431CD164-A0EE-461C-BBE5-57B471D762DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{431CD164-A0EE-461C-BBE5-57B471D762DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{431CD164-A0EE-461C-BBE5-57B471D762DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F9DDA32-CC33-4DAB-A310-5D5CB5B239AC}
+	EndGlobalSection
+EndGlobal
