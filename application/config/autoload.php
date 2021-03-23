@@ -182,6 +182,9 @@ $autoload['model'] = array(
     'Orders_model',
     'Order_status_model',
     'Labels_model',
+    'Material_model',
+    'Pcash_model',
+    'Location_categories_model',
     'Verification_model'
 );
 

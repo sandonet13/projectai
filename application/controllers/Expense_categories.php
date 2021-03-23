@@ -70,6 +70,7 @@ class Expense_categories extends MY_Controller {
     //get data for expenses category list
     function list_data() {
         $list_data = $this->Expense_categories_model->get_details()->result();
+        //echo $list_data;
         $result = array();
         foreach ($list_data as $data) {
             $result[] = $this->_make_row($data);

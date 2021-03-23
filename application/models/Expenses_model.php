@@ -16,6 +16,7 @@ class Expenses_model extends Crud_model {
         $users_table = $this->db->dbprefix('users');
         $taxes_table = $this->db->dbprefix('taxes');
         $clients_table = $this->db->dbprefix('clients');
+        $location_categories_table = $this->db->dbprefix('location_categories');
 
 
         $where = "";
@@ -27,6 +28,11 @@ class Expenses_model extends Crud_model {
         $end_date = get_array_value($options, "end_date");
         if ($start_date && $end_date) {
             $where .= " AND ($expenses_table.expense_date BETWEEN '$start_date' AND '$end_date') ";
+        }
+        
+        $location_id = get_array_value($options, "location_id");
+        if ($location_id) {
+            $where .= " AND $expenses_table.location_id=$location_id";
         }
 
         $category_id = get_array_value($options, "category_id");
@@ -61,7 +67,7 @@ class Expenses_model extends Crud_model {
         $join_custom_fields = get_array_value($custom_field_query_info, "join_string");
 
 
-        $sql = "SELECT $expenses_table.*, $expense_categories_table.title as category_title, 
+        $sql = "SELECT $expenses_table.*, $expense_categories_table.title as category_title, $location_categories_table.title as location_title,
                  CONCAT($users_table.first_name, ' ', $users_table.last_name) AS linked_user_name,
                  $clients_table.company_name AS linked_client_name,
                  $projects_table.title AS project_title,
@@ -69,6 +75,7 @@ class Expenses_model extends Crud_model {
                  tax_table2.percentage AS tax_percentage2
                  $select_custom_fields
         FROM $expenses_table
+        LEFT JOIN $location_categories_table ON $location_categories_table.id= $expenses_table.location_id
         LEFT JOIN $expense_categories_table ON $expense_categories_table.id= $expenses_table.category_id
         LEFT JOIN $clients_table ON $clients_table.id= $expenses_table.client_id
         LEFT JOIN $projects_table ON $projects_table.id= $expenses_table.project_id

@@ -10,6 +10,11 @@
             <table id="note-table" class="display" cellspacing="0" width="100%">
             </table>
         </div>
+        <div class="tab-title clearfix no-border">
+                <div class="title-button-group">
+                    <?php echo modal_anchor(get_uri("expenses/modal_form"), "<i class='fa fa-plus-circle'></i> " . lang('add_expense'), array("class" => "btn btn-default mb0", "title" => lang('add_expense'))); ?>
+                </div>
+            </div>
         <div class="table-responsive">
             <table id="note-table-1" class="display" cellspacing="0" width="100%">
             </table>
@@ -26,10 +31,10 @@
             ],
             columns: [
                 {
-                    title: 'Location'
+                    title: 'Date Time'
                 },
                                 {
-                    title: 'Date Time'
+                    title: 'Location'
                 },
                 {
                     title: 'Balance',
@@ -47,7 +52,6 @@
     });
 </script>
 
-    
 <script type="text/javascript">
     $(document).ready(function() {
         $("#note-table-1").appTable({
@@ -74,19 +78,15 @@
                                 {
                     title: 'Amount'
                 },
+                                                                {
+                    title: 'Location'
+                },
                                 {
                     title: 'Tax'
                 },
                                                 {
                     title: 'Total'
                 },
-                                                {
-                    title: 'Status'
-                },
-                                                                {
-                    title: 'Location'
-                },
-                
                 {
                     title: '<i class="fa fa-bars"></i>',
                     class: "text-center option w100"
@@ -94,7 +94,7 @@
             ],
 			printColumns: combineCustomFieldsColumns([0, 1]),
             xlsColumns: combineCustomFieldsColumns([0, 1]),
-            summation: [{column: 2, dataType: 'currency'}]
+            summation: [{column: 8, dataType: 'currency'}]
 
         });
     });

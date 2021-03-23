@@ -1,17 +1,12 @@
 <?php echo form_open(get_uri("pcash/save"), array("id" => "note-form", "class" => "general-form", "role" => "form")); ?>
 <div id="notes-dropzone" class="post-dropzone">
     <div class="modal-body clearfix">
-
-
-
         <div class="form-group">
+            <label for="location_id" class=" col-md-3"><?php echo lang('location_id'); ?></label>
             <div class="col-md-12">
-                <select name="location" class="form-control">
-                    <option value="" selected disabled></option>
-                    <option value="Cibitung">Cibitung</option>
-                    <option value="Audemars Building">Audemars Building</option>
-					<option value="Field">Field</option>
-                </select>
+                <?php
+                echo form_dropdown("location_id", $location_dropdown, $model_info_loc->location_id, "class='select2 validate-hidden' id='location_id'");
+                ?>
             </div>
         </div>
         <div class="form-group">

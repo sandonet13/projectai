@@ -24,6 +24,8 @@ $settings_menu = array(
     "setup" => array(
         array("name" => "custom_fields", "url" => "custom_fields"),
         array("name" => "tasks", "url" => "task_status"),
+        array("name" => "location_categories", "url" => "location_categories")
+
     )
 );
 

@@ -7,11 +7,11 @@
 
         <div class="form-group">
             <div class="col-md-12">
-                <select name="location" class="form-control">
-                    <option value="" <?php print (!$model_info->location) == '' ? 'selected' : '' ?>></option>
-                    <option value="Cibitung" <?php print ($model_info->location) == 'Cibitung' ? 'selected' : '' ?>>Cibitung</option>
-                    <option value="Audemars Building" <?php print ($model_info->location) == 'Audemars Building' ? 'selected' : '' ?>>Audemars Building</option>
-                    <option value="Field" <?php print ($model_info->location) == 'Field' ? 'selected' : '' ?>>Field</option>
+                <select name="location_id" class="form-control">
+                    <option value="" <?php print (!$model_info->location_id) == '' ? 'selected' : '' ?>></option>
+                    <option value="Cibitung" <?php print ($model_info->location_id) == 'Cibitung' ? 'selected' : '' ?>>Cibitung</option>
+                    <option value="Audemars Building" <?php print ($model_info->location_id) == 'Audemars Building' ? 'selected' : '' ?>>Audemars Building</option>
+                    <option value="Field" <?php print ($model_info->location_id) == 'Field' ? 'selected' : '' ?>>Field</option>
                 </select>
             </div>
         </div>

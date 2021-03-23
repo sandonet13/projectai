@@ -16,15 +16,28 @@ class Pcash_model extends Crud_model
         return $this->db->query($sql);
     }
     
-    function get_details_cibitung($location)
-    {
-        $sql = 'SELECT * FROM petty_cash WHERE location = Cibitung';
-        return $this->db->query($sql);
-    }
 
-    function get_details($id)
-    {
-        $sql = 'SELECT * FROM petty_cash WHERE id = $id';
+    function get_details($options = array()) 
+    {  
+        $petty_table = $this->db->dbprefix('petty_cash');
+        $location_categories_table = $this->db->dbprefix('location_categories');
+        
+        $where = "";
+        $id = get_array_value($options, "id");
+        if ($id) {
+            $where = " AND $petty_table.id=$id";
+        }
+        $start_date = get_array_value($options, "date_time");
+        $location_id = get_array_value($options, "location_id");
+        if ($location_id) {
+            $where .= " AND $petty_table.location_id=$location_id";
+        }
+        
+        
+        $sql = "SELECT $petty_table.*, $location_categories_table.title as location_title
+        FROM $petty_table
+        LEFT JOIN $location_categories_table ON $location_categories_table.id= $petty_table.location_id 
+        WHERE $petty_table.deleted=0 $where";
         return $this->db->query($sql);
     }
 }

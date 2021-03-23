@@ -51,6 +51,12 @@
                 <strong><?php echo lang('category') . ": "; ?></strong> <?php echo $expense_info->category_title; ?>
             </div>
         <?php } ?>
+        
+        <?php if ($expense_info->location_title) { ?>
+            <div class="col-md-12 mb15">
+                <strong><?php echo lang('location') . ": "; ?></strong> <?php echo $expense_info->location_title; ?>
+            </div>
+        <?php } ?>
 
         <?php if ($expense_info->project_title) { ?>
             <div class="col-md-12 mb15">

@@ -25,6 +25,16 @@
                 ?>
             </div>
         </div>
+        
+        <div class="form-group">
+            <label for="location_id" class=" col-md-3"><?php echo lang('location'); ?></label>
+            <div class=" col-md-9">
+                <?php
+                echo form_dropdown("location_id", $location_dropdown, $model_info->location_id, "class='select2 validate-hidden' id='location_id'");
+                ?>
+            </div>
+        </div>
+        
         <div class="form-group">
             <label for="title" class=" col-md-3"><?php echo lang('amount'); ?></label>
             <div class=" col-md-9">
