@@ -10,7 +10,9 @@ class Expenses extends MY_Controller {
 
         $this->init_permission_checker("expense");
 
-        $this->access_only_allowed_members();
+        //$this->access_only_allowed_members();
+        $this->access_only_team_members();
+
     }
 
     //load the expenses list view
@@ -20,24 +22,12 @@ class Expenses extends MY_Controller {
         $view_data["custom_field_headers"] = $this->Custom_fields_model->get_custom_field_headers_for_table("expenses", $this->login_user->is_admin, $this->login_user->user_type);
 
         $view_data['categories_dropdown'] = $this->_get_categories_dropdown();
-        $view_data['members_dropdown'] = $this->_get_team_members_dropdown();
         $view_data['location_dropdown'] = $this->_get_location_dropdown();
+        $view_data['members_dropdown'] = $this->_get_team_members_dropdown();
         $view_data["projects_dropdown"] = $this->_get_projects_dropdown_for_income_and_epxenses("expenses");
 
         $this->template->rander("expenses/index", $view_data);
     }
-    
-    private function _get_location_dropdown() {
-        $location = $this->Location_categories_model->get_all_where(array("deleted" => 0), 0, 0, "location")->result();
-
-        $location_dropdown = array(array("id" => "", "text" => "- " . lang("location") . " -"));
-        foreach ($location as $location) {
-            $location_dropdown[] = array("id" => $location->id, "text" => $location->title);
-        }
-
-        return json_encode($location_dropdown);
-    }
-
 
     //get categories dropdown
     private function _get_categories_dropdown() {
@@ -49,6 +39,17 @@ class Expenses extends MY_Controller {
         }
 
         return json_encode($categories_dropdown);
+    }
+    
+    private function _get_location_dropdown() {
+        $location = $this->Location_categories_model->get_all_where(array("deleted" => 0), 0, 0, "title")->result();
+
+        $location_dropdown = array(array("id" => "", "text" => "- " . lang("location") . " -"));
+        foreach ($location as $location) {
+            $location_dropdown[] = array("id" => $location->id, "text" => $location->title);
+        }
+
+        return json_encode($location_dropdown);
     }
 
     //get team members dropdown
@@ -88,9 +89,6 @@ class Expenses extends MY_Controller {
 
         $model_info = $this->Expenses_model->get_one($this->input->post('id'));
         $view_data['categories_dropdown'] = $this->Expense_categories_model->get_dropdown_list(array("title"));
-       //$view_data['location_dropdown'] = $this->Location_categories_model->get_dropdown_list(array("title"));
-       
-        $this->load->model('Location_categories_model');
         $view_data['location_dropdown'] = $this->Location_categories_model->get_dropdown_list(array("title"));
 
         $team_members = $this->Users_model->get_all_where(array("deleted" => 0, "user_type" => "staff"))->result();
@@ -124,8 +122,8 @@ class Expenses extends MY_Controller {
             "id" => "numeric",
             "expense_date" => "required",
             "category_id" => "required",
-            "amount" => "required",
-            "location_id" => "required"
+            "location_id" => "required",
+            "amount" => "required"
         ));
 
         $id = $this->input->post('id');
@@ -145,13 +143,12 @@ class Expenses extends MY_Controller {
             "title" => $this->input->post('title'),
             "description" => $this->input->post('description'),
             "category_id" => $this->input->post('category_id'),
+            "location_id" => $this->input->post('location_id'),
             "amount" => unformat_currency($this->input->post('amount')),
             "client_id" => $this->input->post('expense_client_id')? $this->input->post('expense_client_id'): 0,
-            "location_id" => $this->input->post('location_id'),
             "project_id" => $this->input->post('expense_project_id'),
             "user_id" => $this->input->post('expense_user_id'),
             "tax_id" => $this->input->post('tax_id') ? $this->input->post('tax_id') : 0,
-            //"tax_id2" => $this->input->post('tax_id2') ? $this->input->post('tax_id2') : 0,
             "recurring" => $recurring,
             "repeat_every" => $repeat_every ? $repeat_every : 0,
             "repeat_type" => $repeat_type ? $repeat_type : NULL,
@@ -242,7 +239,7 @@ class Expenses extends MY_Controller {
 
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("expenses", $this->login_user->is_admin, $this->login_user->user_type);
 
-        $options = array("start_date" => $start_date, "end_date" => $end_date, "category_id" => $category_id, "project_id" => $project_id, "user_id" => $user_id, "custom_fields" => $custom_fields, "recurring" => $recurring);
+        $options = array("start_date" => $start_date, "end_date" => $end_date, "category_id" => $category_id, "location_id" => $location_id, "project_id" => $project_id, "user_id" => $user_id, "custom_fields" => $custom_fields, "recurring" => $recurring);
         $list_data = $this->Expenses_model->get_details($options)->result();
 
         $result = array();
@@ -332,26 +329,22 @@ class Expenses extends MY_Controller {
             }
         }
 
-         $tax = 0;
-        // $tax2 = 0;
-         if ($data->tax_percentage) {
-             $tax = $data->amount * ($data->tax_percentage / 100);
-         }
-        // if ($data->tax_percentage2) {
-        //     $tax2 = $data->amount * ($data->tax_percentage2 / 100);
-        // }
+        $tax = 0;
+        if ($data->tax_percentage) {
+            $tax = $data->amount * ($data->tax_percentage / 100);
+        }
+
 
         $row_data = array(
-            //$data->expense_date,
+            $data->expense_date,
             modal_anchor(get_uri("expenses/expense_details"), format_to_date($data->expense_date, false), array("title" => lang("expense_details"), "data-post-id" => $data->id)),
             $data->category_title,
+            $data->location_title,
             $data->title,
             $description,
             $files_link,
             to_currency($data->amount),
-            $data->location_title,
             to_currency($tax),
-            // to_currency($tax2),
             to_currency($data->amount + $tax)
         );
 

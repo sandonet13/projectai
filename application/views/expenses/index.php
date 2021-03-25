@@ -29,6 +29,7 @@
     </div>
 </div>
 
+
 <script type="text/javascript">
     loadExpensesTable = function (selector, dateRange) {
         var customDatePicker = "", recurring = "0";
@@ -47,6 +48,7 @@
             dateRangeType: dateRange,
             filterDropdown: [
                 {name: "category_id", class: "w200", options: <?php echo $categories_dropdown; ?>},
+                {name: "location_id", class: "w200", options: <?php echo $location_dropdown; ?>},
                 {name: "user_id", class: "w200", options: <?php echo $members_dropdown; ?>},
                 <?php if ($projects_dropdown) { ?>
                     {name: "project_id", class: "w200", options: <?php echo $projects_dropdown; ?>}
@@ -58,6 +60,7 @@
                 {visible: false, searchable: false},
                 {title: '<?php echo lang("date") ?>', "iDataSort": 0},
                 {title: '<?php echo lang("category") ?>'},
+                {title: '<?php echo lang("location") ?>'},
                 {title: '<?php echo lang("title") ?>'},
                 {title: '<?php echo lang("description") ?>'},
                 {title: '<?php echo lang("files") ?>'},
@@ -69,7 +72,7 @@
             ],
             printColumns: [1, 2, 3, 4, 6, 7, 8, 9],
             xlsColumns: [1, 2, 3, 4, 6, 7, 8, 9],
-            summation: [{column: 6, dataType: 'currency'}, {column: 7, dataType: 'currency'}, {column: 8, dataType: 'currency'}]
+            summation: [{column: 6, dataType: 'currency'}, {column: 7, dataType: 'currency'}, {column: 8, dataType: 'currency'}, {column: 9, dataType: 'currency'}]
         });
     };
 

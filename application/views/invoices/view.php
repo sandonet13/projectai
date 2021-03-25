@@ -63,7 +63,29 @@
 
         <div class="mt15">
             <div class="panel panel-default p15 b-t">
-                
+                <div class="clearfix p20">
+                    <!-- small font size is required to generate the pdf, overwrite that for screen -->
+                    <style type="text/css"> .invoice-meta {font-size: 100% !important;}</style>
+
+                    <?php
+                    $color = get_setting("invoice_color");
+                    if (!$color) {
+                        $color = "#2AA384";
+                    }
+                    $invoice_style = get_setting("invoice_style");
+                    $data = array(
+                        "client_info" => $client_info,
+                        "color" => $color,
+                        "invoice_info" => $invoice_info
+                    );
+
+                    if ($invoice_style === "style_2") {
+                        $this->load->view('invoices/invoice_parts/header_style_2.php', $data);
+                    } else {
+                        $this->load->view('invoices/invoice_parts/header_style_1.php', $data);
+                    }
+                    ?>
+                </div>
 
                 <div class="table-responsive mt15 pl15 pr15">
                     <table id="invoice-item-table" class="display" width="100%">            
@@ -146,6 +168,70 @@
         if ("<?php echo $can_edit_invoices ?>") {
             optionVisibility = true;
         }
+
+        $("#invoice-item-table").appTable({
+            source: '<?php echo_uri("invoices/item_list_data/" . $invoice_info->id . "/") ?>',
+            order: [[0, "asc"]],
+            hideTools: true,
+            displayLength: 100,
+            columns: [
+                {visible: false, searchable: false},
+                {title: '<?php echo lang("item") ?> ', "bSortable": false},
+                {title: '<?php echo lang("quantity") ?>', "class": "text-right w15p", "bSortable": false},
+                {title: '<?php echo lang("rate") ?>', "class": "text-right w15p", "bSortable": false},
+                {title: '<?php echo lang("total") ?>', "class": "text-right w15p", "bSortable": false},
+                {title: '<i class="fa fa-bars"></i>', "class": "text-center option w100", "bSortable": false, visible: optionVisibility}
+            ],
+            onInitComplete: function () {
+<?php if ($can_edit_invoices) { ?>
+                    //apply sortable
+                    $("#invoice-item-table").find("tbody").attr("id", "invoice-item-table-sortable");
+                    var $selector = $("#invoice-item-table-sortable");
+
+                    Sortable.create($selector[0], {
+                        animation: 150,
+                        chosenClass: "sortable-chosen",
+                        ghostClass: "sortable-ghost",
+                        onUpdate: function (e) {
+                            appLoader.show();
+                            //prepare sort indexes 
+                            var data = "";
+                            $.each($selector.find(".item-row"), function (index, ele) {
+                                if (data) {
+                                    data += ",";
+                                }
+
+                                data += $(ele).attr("data-id") + "-" + index;
+                            });
+
+                            //update sort indexes
+                            $.ajax({
+                                url: '<?php echo_uri("Invoices/update_item_sort_values") ?>',
+                                type: "POST",
+                                data: {sort_values: data},
+                                success: function () {
+                                    appLoader.hide();
+                                }
+                            });
+                        }
+                    });
+
+<?php } ?>
+
+            },
+            onDeleteSuccess: function (result) {
+                $("#invoice-total-section").html(result.invoice_total_view);
+                if (typeof updateInvoiceStatusBar == 'function') {
+                    updateInvoiceStatusBar(result.invoice_id);
+                }
+            },
+            onUndoSuccess: function (result) {
+                $("#invoice-total-section").html(result.invoice_total_view);
+                if (typeof updateInvoiceStatusBar == 'function') {
+                    updateInvoiceStatusBar(result.invoice_id);
+                }
+            }
+        });
 
         $("#invoice-payment-table").appTable({
             source: '<?php echo_uri("invoice_payments/payment_list_data/" . $invoice_info->id . "/") ?>',

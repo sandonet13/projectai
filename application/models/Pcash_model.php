@@ -16,6 +16,42 @@ class Pcash_model extends Crud_model
         return $this->db->query($sql);
     }
     
+    function get_list_audemars()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+        $expenses_table = $this->db->dbprefix('expenses');
+        
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=1 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=1 AND $expenses_table.deleted=0) AS total_ai";
+        return $this->db->query($sql);
+    }
+    
+    function get_list_cibitung()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+        $expenses_table = $this->db->dbprefix('expenses');
+        
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=2 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=2 AND $expenses_table.deleted=0) AS total_cibitung";
+        return $this->db->query($sql);
+    }
+    
+    function get_list_field_langgak()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+        $expenses_table = $this->db->dbprefix('expenses');
+        
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=3 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=3 AND $expenses_table.deleted=0) AS total_field_langgak";
+        return $this->db->query($sql);
+    }
+    
+    function get_list_field_phe()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+        $expenses_table = $this->db->dbprefix('expenses');
+        
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=4 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=4 AND $expenses_table.deleted=0) AS total_field_phe";
+        return $this->db->query($sql);
+    }
+    
 
     function get_details($options = array()) 
     {  

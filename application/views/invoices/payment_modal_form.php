@@ -28,7 +28,7 @@
         <div class="col-md-9">
             <?php
             echo form_input(array(
-                "ids" => "invoice_payment_date",
+                "id" => "invoice_payment_date",
                 "name" => "invoice_payment_date",
                 "value" => $model_info->payment_date,
                 "class" => "form-control",

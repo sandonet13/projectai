@@ -51,12 +51,12 @@
                         ],
                         rangeDatepicker: customDatePicker,
                         columns: [
-                        {title: '<?php echo lang("invoice_ids") ?> ', "class": "w10p"},
+                        {title: '<?php echo lang("invoice_id") ?> ', "class": "w10p"},
                         {visible: false, searchable: false},
                         {title: '<?php echo lang("payment_date") ?> ', "class": "w15p", "iDataSort": 1},
                         {title: '<?php echo lang("payment_method") ?>', "class": "w15p"},
                         {title: '<?php echo lang("note") ?>'},
-                        {title: '<?php echo lang("amountsssss") ?>', "class": "text-right w15p"}
+                        {title: '<?php echo lang("amount") ?>', "class": "text-right w15p"}
                         ],
                         summation: [{column: 5, dataType: 'currency', currencySymbol: AppHelper.settings.currencySymbol}],
                         printColumns: [0, 1, 2, 3, 4],

@@ -1,11 +1,10 @@
-<?php echo form_open(get_uri("pcash/save"), array("id" => "note-form", "class" => "general-form", "role" => "form")); ?>
-<div id="notes-dropzone" class="post-dropzone">
+<?php echo form_open(get_uri("pcash/save"), array("id" => "expense-form", "class" => "general-form", "role" => "form")); ?>
+<div id="expenses-dropzone" class="post-dropzone">
     <div class="modal-body clearfix">
         <div class="form-group">
-            <label for="location_id" class=" col-md-3"><?php echo lang('location_id'); ?></label>
             <div class="col-md-12">
                 <?php
-                echo form_dropdown("location_id", $location_dropdown, $model_info_loc->location_id, "class='select2 validate-hidden' id='location_id'");
+                echo form_dropdown("location_id", $location_dropdown, $model_info->location_id, "class='select2 validate-hidden' id='location_id'");
                 ?>
             </div>
         </div>
@@ -13,13 +12,10 @@
             <div class="col-md-12">
                 <?php
                 echo form_input(array(
-                    "id" => "start_date",
+                    "id" => "date_time",
                     "name" => "date_time",
                     "class" => "form-control",
-                    'data-date-format' => 'yyyy-mm-dd',
-                    "placeholder" => 'Date Time',
-                    "value" => is_date_exists($model_info->title) ? $model_info->title : "",
-                    "autocomplete" => "off",
+                    "value" => $model_info->date_time ? $model_info->date_time : get_my_local_time("Y-m-d"),
                     "data-rule-required" => true,
                     "data-msg-required" => lang("field_required"),
                 ));
@@ -31,7 +27,7 @@
                 <?php
                 echo form_input(array(
                     "name" => "balance",
-                    "value" => $model_info->title,
+                    "value" => $model_info->balance,
                     "class" => "form-control",
                     "placeholder" => "Balance",
                     "data-rule-required" => true,
@@ -44,35 +40,32 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-close"></span> <?php echo lang('close'); ?></button>
-        <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle"></span> <?php echo lang('save'); ?></button>
+        <div class="row">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-close"></span> <?php echo lang('close'); ?></button>
+            <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle"></span> <?php echo lang('save'); ?></button>
+        </div>
     </div>
 </div>
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#start_date').datepicker()
-        var uploadUrl = "<?php echo get_uri("notes/upload_file"); ?>";
-        var validationUri = "<?php echo get_uri("notes/validate_notes_file"); ?>";
 
-        var dropzone = attachDropzoneWithForm("#notes-dropzone", uploadUrl, validationUri);
-
-        $("#note-form").appForm({
-            onSuccess: function(result) {
-                $("#note-table").appTable({
-                    newData: result.data,
-                    dataId: result.id
-                });
-            }
+        $("#expense-form").appForm({
+            onSuccess: function (result) {
+                if (typeof $PCASH_TABLE !== 'undefined') {
+                    $PCASH_TABLE.appTable({newData: result.data, dataId: result.id});
+                } else {
+                    location.reload();
+                }
+            },
         });
 
-        $("#title").focus();
+        setDatePicker("#date_time");
 
-        $("#note_labels").select2({
-            multiple: true,
-            data: <?php echo json_encode($label_suggestions); ?>
-        });
+        $("#expense-form .select2").select2();
+        
+        $('[data-toggle="tooltip"]').tooltip();
 
 
 

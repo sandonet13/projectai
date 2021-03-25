@@ -3,12 +3,7 @@
         "@saveall": true
     },
     "extensions": {
-        "@aws.profile": "profile:default",
-        "@git.autofetch": true,
-        "@git.confirmSync": false
-    },
-    "instance": {
-        "@automaticShutdown": "240"
+        "@aws.profile": "profile:default"
     },
     "language": {
         "tern_defs": {
@@ -32,7 +27,6 @@
         "@path": "/usr/local/lib/python3.4/dist-packages:/usr/local/lib/python3.5/dist-packages"
     },
     "run": {
-        "@runner": "Shell command",
         "configs": {
             "@inited": "true",
             "json()": {}

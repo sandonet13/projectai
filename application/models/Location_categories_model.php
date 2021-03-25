@@ -10,16 +10,16 @@ class Location_categories_model extends Crud_model {
     }
 
     function get_details($options = array()) {
-        $expense_categories_table = $this->db->dbprefix('location_categories');
+        $location_categories_table = $this->db->dbprefix('location_categories');
         $where = "";
         $id = get_array_value($options, "id");
         if ($id) {
-            $where = " AND $expense_categories_table.id=$id";
+            $where = " AND $location_categories_table.id=$id";
         }
 
-        $sql = "SELECT $expense_categories_table.*
-        FROM $expense_categories_table
-        WHERE $expense_categories_table.deleted=0 $where";
+        $sql = "SELECT $location_categories_table.*
+        FROM $location_categories_table
+        WHERE $location_categories_table.deleted=0 $where";
         return $this->db->query($sql);
     }
 

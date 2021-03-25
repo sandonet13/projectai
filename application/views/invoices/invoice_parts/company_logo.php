@@ -1,1 +1,1 @@
-<img src="<?php echo get_file_from_setting('invoice_logo', get_setting('only_file_path')); ?>" />
+<img src="http://18.140.4.134:8080/files/system/_file605c2f55f2b25-invoice-logo.png"/>

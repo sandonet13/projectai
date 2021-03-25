@@ -366,6 +366,7 @@ $lang["file_comment_reply"] = "File comment reply   ";
 $lang["customer_feedback_reply"] = "Customer feedback reply";
 
 /* location*/
+$lang["location"] = "Location";
 $lang["location_categories"] = "Location Categories";
 $lang["edit_location_categories"] = "Edit Location Categories";
 $lang["delete_location_categories"] = "Delete Location Categories";
@@ -374,6 +375,7 @@ $lang["delete_location_categories"] = "Delete Location Categories";
 $lang["pcash"] = "Petty Cash";
 $lang["edit_pcash"] = "Edit Petty Cash";
 $lang["delete_pcash"] = "Delete Petty Cash";
+$lang["add_pcash"] = "Add Petty Cash";
 
 /* expense */
 $lang["add_category"] = "Add category";
