@@ -371,6 +371,13 @@ $lang["location_categories"] = "Location Categories";
 $lang["edit_location_categories"] = "Edit Location Categories";
 $lang["delete_location_categories"] = "Delete Location Categories";
 
+/* measurement*/
+$lang["measurement"] = "Measurement";
+$lang["add_measurement"] = "Add Measurement";
+$lang["edit_location_measurement"] = "Edit Measurement";
+$lang["delete_location_measurement"] = "Delete Measurement";
+
+
 /* petty cash*/
 $lang["pcash"] = "Petty Cash";
 $lang["edit_pcash"] = "Edit Petty Cash";
