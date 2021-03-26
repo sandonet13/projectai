@@ -22,18 +22,19 @@
                 {visible: false, searchable: false},
                 {title: '<?php echo lang("date") ?>', "iDataSort": 0},
                 {title: '<?php echo lang("category") ?>'},
+                {title: '<?php echo lang("location") ?>'},
+                {title: '<?php echo lang("measurement") ?>'},
                 {title: '<?php echo lang("title") ?>'},
                 {title: '<?php echo lang("description") ?>'},
-                {title: '<?php echo lang("file") ?>'},
+                {title: '<?php echo lang("files") ?>'},
                 {title: '<?php echo lang("amount") ?>', "class": "text-right"},
-                {title: '<?php echo lang("tax") ?>', "class": "text-right"},
-                {title: '<?php echo lang("second_tax") ?>', "class": "text-right"},
+                {title: '<?php echo lang("qty") ?>', "class": "text-right"},
                 {title: '<?php echo lang("total") ?>', "class": "text-right"},
                 {title: '<i class="fa fa-bars"></i>', "class": "text-center option w100"}
             ],
             printColumns: [1, 2, 3, 4, 6, 7, 8, 9],
             xlsColumns: [1, 2, 3, 4, 6, 7, 8, 9],
-            summation: [{column: 6, dataType: 'currency'}, {column: 7, dataType: 'currency'}, {column: 8, dataType: 'currency'}, {column: 9, dataType: 'currency'}]
+            summation: [{column: 8, dataType: 'currency'}, {column: 10, dataType: 'currency'}]
         });
     });
 </script>

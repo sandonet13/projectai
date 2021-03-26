@@ -23,6 +23,7 @@ class Expenses extends MY_Controller {
 
         $view_data['categories_dropdown'] = $this->_get_categories_dropdown();
         $view_data['location_dropdown'] = $this->_get_location_dropdown();
+        $view_data['measurement_dropdown'] = $this->_get_measurement_dropdown();
         $view_data['members_dropdown'] = $this->_get_team_members_dropdown();
         $view_data["projects_dropdown"] = $this->_get_projects_dropdown_for_income_and_epxenses("expenses");
 
@@ -50,6 +51,17 @@ class Expenses extends MY_Controller {
         }
 
         return json_encode($location_dropdown);
+    }
+    
+    private function _get_measurement_dropdown() {
+        $measurement = $this->Measurement_model->get_all_where(array("deleted" => 0), 0, 0, "title")->result();
+
+        $measurement_dropdown = array(array("id" => "", "text" => "- " . lang("measurement") . " -"));
+        foreach ($measurement as $measurement) {
+            $measurement_dropdown[] = array("id" => $measurement->id, "text" => $measurement->title);
+        }
+
+        return json_encode($measurement_dropdown);
     }
 
     //get team members dropdown
@@ -88,8 +100,11 @@ class Expenses extends MY_Controller {
         $client_id = $this->input->post('client_id');
 
         $model_info = $this->Expenses_model->get_one($this->input->post('id'));
+        //var_dump($model_info);
         $view_data['categories_dropdown'] = $this->Expense_categories_model->get_dropdown_list(array("title"));
         $view_data['location_dropdown'] = $this->Location_categories_model->get_dropdown_list(array("title"));
+        $view_data['measurement_dropdown'] = $this->Measurement_model->get_dropdown_list(array("title"));
+
 
         $team_members = $this->Users_model->get_all_where(array("deleted" => 0, "user_type" => "staff"))->result();
         $members_dropdown = array();
@@ -101,7 +116,7 @@ class Expenses extends MY_Controller {
         $view_data['members_dropdown'] = array("0" => "-") + $members_dropdown;
         $view_data['clients_dropdown'] = array("" => "-") + $this->Clients_model->get_dropdown_list(array("company_name"), "id", array("is_lead" => 0));
         $view_data['projects_dropdown'] = array("0" => "-") + $this->Projects_model->get_dropdown_list(array("title"));
-        $view_data['taxes_dropdown'] = array("" => "-") + $this->Taxes_model->get_dropdown_list(array("title"));
+       // $view_data['taxes_dropdown'] = array("" => "-") + $this->Taxes_model->get_dropdown_list(array("title"));
 
         $model_info->project_id = $model_info->project_id ? $model_info->project_id : $this->input->post('project_id');
         $model_info->user_id = $model_info->user_id ? $model_info->user_id : $this->input->post('user_id');
@@ -123,7 +138,9 @@ class Expenses extends MY_Controller {
             "expense_date" => "required",
             "category_id" => "required",
             "location_id" => "required",
-            "amount" => "required"
+            "measurement_id" => "required",
+            "amount" => "required",
+            "qty" => "required"
         ));
 
         $id = $this->input->post('id');
@@ -144,7 +161,9 @@ class Expenses extends MY_Controller {
             "description" => $this->input->post('description'),
             "category_id" => $this->input->post('category_id'),
             "location_id" => $this->input->post('location_id'),
+            "measurement_id" => $this->input->post('measurement_id'),
             "amount" => unformat_currency($this->input->post('amount')),
+            "qty" => $this->input->post('qty'),
             "client_id" => $this->input->post('expense_client_id')? $this->input->post('expense_client_id'): 0,
             "project_id" => $this->input->post('expense_project_id'),
             "user_id" => $this->input->post('expense_user_id'),
@@ -234,12 +253,13 @@ class Expenses extends MY_Controller {
         $end_date = $this->input->post('end_date');
         $category_id = $this->input->post('category_id');
         $location_id = $this->input->post('location_id');
+        $measurement_id = $this->input->post('measurement_id');
         $project_id = $this->input->post('project_id');
         $user_id = $this->input->post('user_id');
 
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("expenses", $this->login_user->is_admin, $this->login_user->user_type);
 
-        $options = array("start_date" => $start_date, "end_date" => $end_date, "category_id" => $category_id, "location_id" => $location_id, "project_id" => $project_id, "user_id" => $user_id, "custom_fields" => $custom_fields, "recurring" => $recurring);
+        $options = array("start_date" => $start_date, "end_date" => $end_date, "category_id" => $category_id, "location_id" => $location_id, "measurement_id" => $measurement_id, "project_id" => $project_id, "user_id" => $user_id, "custom_fields" => $custom_fields, "recurring" => $recurring);
         $list_data = $this->Expenses_model->get_details($options)->result();
 
         $result = array();
@@ -340,12 +360,13 @@ class Expenses extends MY_Controller {
             modal_anchor(get_uri("expenses/expense_details"), format_to_date($data->expense_date, false), array("title" => lang("expense_details"), "data-post-id" => $data->id)),
             $data->category_title,
             $data->location_title,
+            $data->measurement_title,
             $data->title,
             $description,
             $files_link,
             to_currency($data->amount),
-            to_currency($tax),
-            to_currency($data->amount + $tax)
+            $data->qty,
+            to_currency($data->amount * $data->qty)
         );
 
         foreach ($custom_fields as $field) {
@@ -557,6 +578,7 @@ class Expenses extends MY_Controller {
         $expense_id = $this->input->post('id');
         $options = array("id" => $expense_id);
         $info = $this->Expenses_model->get_details($options)->row();
+        //var_dump($info);
         if (!$info) {
             show_404();
         }

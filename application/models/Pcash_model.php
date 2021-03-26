@@ -21,7 +21,7 @@ class Pcash_model extends Crud_model
         $petty_table = $this->db->dbprefix('petty_cash');
         $expenses_table = $this->db->dbprefix('expenses');
         
-        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=1 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=1 AND $expenses_table.deleted=0) AS total_ai";
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=1 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) * $expenses_table.qty FROM $expenses_table where $expenses_table.location_id=1 AND $expenses_table.deleted=0) AS total_ai";
         return $this->db->query($sql);
     }
     
@@ -30,7 +30,7 @@ class Pcash_model extends Crud_model
         $petty_table = $this->db->dbprefix('petty_cash');
         $expenses_table = $this->db->dbprefix('expenses');
         
-        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=2 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=2 AND $expenses_table.deleted=0) AS total_cibitung";
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=2 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) * $expenses_table.qty FROM $expenses_table where $expenses_table.location_id=2 AND $expenses_table.deleted=0) AS total_cibitung";
         return $this->db->query($sql);
     }
     
@@ -39,7 +39,7 @@ class Pcash_model extends Crud_model
         $petty_table = $this->db->dbprefix('petty_cash');
         $expenses_table = $this->db->dbprefix('expenses');
         
-        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=3 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=3 AND $expenses_table.deleted=0) AS total_field_langgak";
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=3 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) * $expenses_table.qty FROM $expenses_table where $expenses_table.location_id=3 AND $expenses_table.deleted=0) AS total_field_langgak";
         return $this->db->query($sql);
     }
     
@@ -48,7 +48,7 @@ class Pcash_model extends Crud_model
         $petty_table = $this->db->dbprefix('petty_cash');
         $expenses_table = $this->db->dbprefix('expenses');
         
-        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=4 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) FROM $expenses_table where $expenses_table.location_id=4 AND $expenses_table.deleted=0) AS total_field_phe";
+        $sql = "SELECT (SELECT SUM($petty_table.balance) FROM $petty_table WHERE $petty_table.location_id=4 AND $petty_table.deleted=0) - (SELECT SUM($expenses_table.amount) * $expenses_table.qty FROM $expenses_table where $expenses_table.location_id=4 AND $expenses_table.deleted=0) AS total_field_phe";
         return $this->db->query($sql);
     }
     

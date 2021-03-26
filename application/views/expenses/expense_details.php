@@ -6,34 +6,19 @@
             <div>
                 <?php
                 if ($expense_info->amount) {
-                    //prepare amount 
-                    $tax = 0;
-                    $tax2 = 0;
-                    if ($expense_info->tax_percentage) {
-                        $tax = $expense_info->amount * ($expense_info->tax_percentage / 100);
-                    }
-                    if ($expense_info->tax_percentage2) {
-                        $tax2 = $expense_info->amount * ($expense_info->tax_percentage2 / 100);
-                    }
+                    //
 
-                    $total_amount = to_currency($expense_info->amount + $tax + $tax2);
+                    $total_amount = to_currency($expense_info->amount * $expense_info->qty);
+                    $total_qty = $expense_info->qty;
 
                     echo "<span class='font-14'>$total_amount</span> ";
 
-                    if ($tax || $tax2) {
                         $amount = to_currency($expense_info->amount);
-                        if ($tax) {
-                            $amount .= " + " . to_currency($tax) . " (" . lang("tax") . ")";
-                        }
-                        if ($tax2) {
-                            $amount .= " + " . to_currency($tax2) . " (" . lang("second_tax") . ")";
-                        }
 
-                        $amount .= " = " . $total_amount . " " . lang("total");
+                        $amount .= " * " . $total_qty . " = " . $total_amount . " " . lang("total");
 
                         echo "<span class='text-off'>(" . $amount . ")</span>";
                     }
-                }
                 ?>
             </div>
         </div>

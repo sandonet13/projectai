@@ -17,6 +17,8 @@ class Expenses_model extends Crud_model {
         $taxes_table = $this->db->dbprefix('taxes');
         $clients_table = $this->db->dbprefix('clients');
         $location_categories_table = $this->db->dbprefix('location_categories');
+        $measurement_table = $this->db->dbprefix('measurement');
+
 
 
         $where = "";
@@ -33,6 +35,11 @@ class Expenses_model extends Crud_model {
         $location_id = get_array_value($options, "location_id");
         if ($location_id) {
             $where .= " AND $expenses_table.location_id=$location_id";
+        }
+        
+        $measurement_id = get_array_value($options, "measurement_id");
+        if ($measurement_id) {
+            $where .= " AND $expenses_table.measurement_id=$measurement_id";
         }
 
         $category_id = get_array_value($options, "category_id");
@@ -67,21 +74,20 @@ class Expenses_model extends Crud_model {
         $join_custom_fields = get_array_value($custom_field_query_info, "join_string");
 
 
-        $sql = "SELECT $expenses_table.*, $expense_categories_table.title as category_title, $location_categories_table.title as location_title,
+        $sql = "SELECT $expenses_table.*, $expense_categories_table.title as category_title, $location_categories_table.title as location_title, $measurement_table.title as measurement_title,
                  CONCAT($users_table.first_name, ' ', $users_table.last_name) AS linked_user_name,
                  $clients_table.company_name AS linked_client_name,
                  $projects_table.title AS project_title,
-                 tax_table.percentage AS tax_percentage,
-                 tax_table2.percentage AS tax_percentage2
+                 tax_table.percentage AS tax_percentage
                  $select_custom_fields
         FROM $expenses_table
         LEFT JOIN $location_categories_table ON $location_categories_table.id= $expenses_table.location_id
+        LEFT JOIN $measurement_table ON $measurement_table.id= $expenses_table.measurement_id
         LEFT JOIN $expense_categories_table ON $expense_categories_table.id= $expenses_table.category_id
         LEFT JOIN $clients_table ON $clients_table.id= $expenses_table.client_id
         LEFT JOIN $projects_table ON $projects_table.id= $expenses_table.project_id
         LEFT JOIN $users_table ON $users_table.id= $expenses_table.user_id
         LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table ON tax_table.id = $expenses_table.tax_id
-        LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table2 ON tax_table2.id = $expenses_table.tax_id2
             $join_custom_fields
         WHERE $expenses_table.deleted=0 $where";
         return $this->db->query($sql);

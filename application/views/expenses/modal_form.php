@@ -36,6 +36,33 @@
         </div>
         
         <div class="form-group">
+            <label for="measurement_id" class=" col-md-3"><?php echo lang('measurement'); ?></label>
+            <div class=" col-md-9">
+                <?php
+                echo form_dropdown("measurement_id", $measurement_dropdown, $model_info->measurement_id, "class='select2 validate-hidden' id='measurement_id'");
+                ?>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="title" class=" col-md-3"><?php echo lang('qty'); ?></label>
+            <div class=" col-md-9">
+                <?php
+                echo form_input(array(
+                    "id" => "qty",
+                    "name" => "qty",
+                    "value" => $model_info->qty,
+                    "class" => "form-control",
+                    "placeholder" => lang('qty'),
+                    "autofocus" => true,
+                    "data-rule-required" => true,
+                    "data-msg-required" => lang("field_required"),
+                ));
+                ?>
+            </div>
+        </div>
+        
+        <div class="form-group">
             <label for="title" class=" col-md-3"><?php echo lang('amount'); ?></label>
             <div class=" col-md-9">
                 <?php
@@ -117,14 +144,14 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="tax_id" class=" col-md-3"><?php echo lang('tax'); ?></label>
-            <div class="col-md-9">
-                <?php
-                echo form_dropdown("tax_id", $taxes_dropdown, array($model_info->tax_id), "class='select2'");
-                ?>
-            </div>
-        </div>
+        <!--<div class="form-group">-->
+        <!--    <label for="tax_id" class=" col-md-3"><?php echo lang('tax'); ?></label>-->
+        <!--    <div class="col-md-9">-->
+        <!--        <?php-->
+        <!--        echo form_dropdown("tax_id", $taxes_dropdown, array($model_info->tax_id), "class='select2'");-->
+        <!--        ?>-->
+        <!--    </div>-->
+        <!--</div>-->
 
         <!--<div class="form-group">-->
         <!--    <label for="tax_id" class=" col-md-3"><?php echo lang('second_tax'); ?></label>-->
