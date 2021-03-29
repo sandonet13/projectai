@@ -6,7 +6,6 @@
                     <?php echo modal_anchor(get_uri("pcash/modal_form"), "<i class='fa fa-plus-circle'></i> " . lang('add_pcash'), array("class" => "btn btn-default mb0", "title" => lang('add_pcash'))); ?>
             </div>
         </div>
-
 <div class="dashboards-row clearfix row"><div class="widget-container col-md-4">
 <div class="panel panel-sky">
     <a href="" class="white-link">
@@ -44,7 +43,7 @@
         </div>
     </a>
 </div></div><div class="widget-container col-md-4">
-    <div class="panel panel-coral">
+    <div class="panel panel-success">
     <a href="" class="white-link">
         <div class="panel-body ">
             <div class="widget-icon">

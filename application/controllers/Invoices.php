@@ -868,6 +868,7 @@ class Invoices extends MY_Controller {
     function download_pdf($invoice_id = 0, $mode = "download") {
         if ($invoice_id) {
             $invoice_data = get_invoice_making_data($invoice_id);
+            //echo json_encode($invoice_data);
             $this->_check_invoice_access_permission($invoice_data);
 
             prepare_invoice_pdf($invoice_data, $mode);

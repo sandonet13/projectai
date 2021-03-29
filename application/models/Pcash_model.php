@@ -16,6 +16,38 @@ class Pcash_model extends Crud_model
         return $this->db->query($sql);
     }
     
+    function get_list_audemars_balance()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+
+        $sql = "SELECT SUM($petty_table.balance) AS balance FROM $petty_table WHERE $petty_table.location_id=1 AND $petty_table.deleted=0";
+        return $this->db->query($sql);
+    }
+    
+    function get_list_cibitung_balance()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+
+        $sql = "SELECT SUM($petty_table.balance) AS balance FROM $petty_table WHERE $petty_table.location_id=2 AND $petty_table.deleted=0";
+        return $this->db->query($sql);
+    }
+    
+    function get_list_field_langgak_balance()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+
+        $sql = "SELECT SUM($petty_table.balance) AS balance FROM $petty_table WHERE $petty_table.location_id=3 AND $petty_table.deleted=0";
+        return $this->db->query($sql);
+    }
+    
+    function get_list_field_phe_balance()
+    {
+        $petty_table = $this->db->dbprefix('petty_cash');
+
+        $sql = "SELECT SUM($petty_table.balance) AS balance FROM $petty_table WHERE $petty_table.location_id=4 AND $petty_table.deleted=0";
+        return $this->db->query($sql);
+    }
+    
     function get_list_audemars()
     {
         $petty_table = $this->db->dbprefix('petty_cash');

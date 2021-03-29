@@ -137,15 +137,15 @@
         </div>
 
 
-        <div class="col-md-3 widget-container">
-            <?php
-            if ($show_income_vs_expenses) {
-                income_vs_expenses_widget();
-            } else {
-                my_task_stataus_widget();
-            }
-            ?>
-        </div>
+        <!--<div class="col-md-3 widget-container">-->
+        <!--    <?php-->
+        <!--    if ($show_income_vs_expenses) {-->
+        <!--        income_vs_expenses_widget();-->
+        <!--    } else {-->
+        <!--        my_task_stataus_widget();-->
+        <!--    }-->
+        <!--    ?>-->
+        <!--</div>-->
 
         <?php if ($show_event) { ?>
             <div class="col-md-3 widget-container">
