@@ -93,9 +93,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <?php
-                    if ($show_invoice_statistics) {
-                        invoice_statistics_widget();
-                    } else if ($show_project_timesheet) {
+					if ($show_project_timesheet) {
                         if ($this->login_user->is_admin) {
                             project_timesheet_statistics_widget("all_timesheet_statistics");
                         } else {
@@ -140,9 +138,9 @@
         <div class="col-md-3 widget-container">
             <?php
             if ($show_income_vs_expenses) {
-                income_vs_expenses_widget();
-            } else {
                 my_task_stataus_widget();
+            } else {
+                income_vs_expenses_widget();
             }
             ?>
         </div>

@@ -219,7 +219,7 @@ class Material extends MY_Controller
     {
 
         $config['upload_path'] = './files/system/';
-        $config['allowed_types'] = 'pdf';
+        $config['allowed_types'] = 'pdf|jpg|jpeg';
         $config['max_size'] = 30000;
 
         $this->load->library('upload', $config);
@@ -295,7 +295,7 @@ class Material extends MY_Controller
     function edit()
     {
         $config['upload_path'] = './files/system/';
-        $config['allowed_types'] = 'pdf';
+        $config['allowed_types'] = 'pdf|jpg|jpeg';
         $config['max_size'] = 30000;
 
         $this->load->library('upload', $config);

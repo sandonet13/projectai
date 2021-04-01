@@ -27,28 +27,52 @@ class Pcash extends MY_Controller
     
     private function _get_list_ai() {
         $total = $this->Pcash_model->get_list_audemars(array("total_ai"))->result();
+        $corr_zero = $this->Pcash_model->get_list_audemars_balance(array("balance"))->result();
         $tot_cur_ai = $total[0]->total_ai;
+        $tot_corr_zero = $corr_zero[0]->balance;
+        if($tot_cur_ai == 0)
+        {
+            $tot_cur_ai = $tot_corr_zero;
+        }
         
         return (to_currency($tot_cur_ai));
     }
     
     private function _get_list_cibitung() {
         $total = $this->Pcash_model->get_list_cibitung(array("total_cibitung"))->result();
+        $corr_zero = $this->Pcash_model->get_list_cibitung_balance(array("balance"))->result();
         $tot_cur_cibitung = $total[0]->total_cibitung;
+        $tot_corr_zero = $corr_zero[0]->balance;
+        if($tot_cur_cibitung == 0)
+        {
+            $tot_cur_cibitung = $tot_corr_zero;
+        }
         
         return (to_currency($tot_cur_cibitung));
     }
     
     private function _get_list_field_langgak() {
         $total = $this->Pcash_model->get_list_field_langgak(array("total_field_langgak"))->result();
+        $corr_zero = $this->Pcash_model->get_list_field_langgak_balance(array("balance"))->result();
         $tot_cur_field_langgak = $total[0]->total_field_langgak;
+        $tot_corr_zero = $corr_zero[0]->balance;
+        if($tot_cur_field_langgak == 0)
+        {
+            $tot_cur_field_langgak = $tot_corr_zero;
+        }
         
         return (to_currency($tot_cur_field_langgak));
     }
     
     private function _get_list_field_phe() {
         $total = $this->Pcash_model->get_list_field_phe(array("total_field_phe"))->result();
+        $corr_zero = $this->Pcash_model->get_list_field_phe_balance(array("balance"))->result();
         $tot_cur_field_phe = $total[0]->total_field_phe;
+        $tot_corr_zero = $corr_zero[0]->balance;
+        if($tot_cur_field_phe == 0)
+        {
+            $tot_cur_field_phe = $tot_corr_zero;
+        }
         
         return (to_currency($tot_cur_field_phe));
     }
