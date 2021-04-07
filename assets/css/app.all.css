@@ -1531,6 +1531,11 @@ a.dark:hover{
 .mt-50{
     margin-top: -50px;
 }
+.pcustom {
+    padding-left: 20px;
+    padding-right: 50%;
+    padding-top: 10px;
+}
 .p0 {
     padding: 0 !important;
 }
@@ -1544,7 +1549,16 @@ a.dark:hover{
     padding: 15px;
 }
 .p20 {
-    padding: 20px !important;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px !important;
+}
+.p21 {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px !important;
 }
 .p30 {
     padding: 30px;

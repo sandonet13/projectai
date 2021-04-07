@@ -230,6 +230,10 @@ $lang["announcements"] = "Announcements";
 $lang["all_team_members"] = "All team members";
 $lang["all_team_clients"] = "All Clients";
 
+/*Add Item MR*/
+$lang["add_item_mr"] = "Add Item MR";
+
+
 /* settings */
 $lang["app_settings"] = "App Settings";
 $lang["app_title"] = "App Title";
@@ -373,6 +377,30 @@ $lang["location"] = "Location";
 $lang["location_categories"] = "Location Categories";
 $lang["edit_location_categories"] = "Edit Location Categories";
 $lang["delete_location_categories"] = "Delete Location Categories";
+
+$lang["submit"] = "Submit";
+
+
+/*add item*/
+$lang["item_name"] = "Item Name";
+$lang["specification"] = "Specification";
+
+
+
+/*add mr*/
+$lang["action"] = "Actions";
+$lang["mr_no"] = "MR Number";
+$lang["date_request"] = "Date of Request";
+$lang["add_material_request"] = "Material Request";
+$lang["add_add_material_request"] = "Add Material Request";
+$lang["edit_add_material_request"] = "Edit Material Request";
+$lang["delete_add_material_request"] = "Delete Material Request";
+
+/*status mr*/
+$lang["status_mr"] = "Status MR";
+$lang["add_status_mr"] = "Add Status MR";
+$lang["edit_status_mr"] = "Edit Status MR";
+$lang["delete_status_mr"] = "Delete Status MR";
 
 /* measurement*/
 $lang["measurement"] = "Measurement";

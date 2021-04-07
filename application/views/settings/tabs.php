@@ -25,7 +25,8 @@ $settings_menu = array(
         array("name" => "custom_fields", "url" => "custom_fields"),
         array("name" => "tasks", "url" => "task_status"),
         array("name" => "location_categories", "url" => "location_categories"),
-        array("name" => "measurement", "url" => "measurement")
+        array("name" => "measurement", "url" => "measurement"),
+        array("name" => "status_mr", "url" => "status_mr")
 
 
     )

@@ -186,6 +186,9 @@ $autoload['model'] = array(
     'Pcash_model',
     'Location_categories_model',
     'Measurement_model',
-    'Verification_model'
+    'Verification_model',
+    'Status_mr_model',
+    'Add_material_request_model',
+    'Add_item_model'
 );
 

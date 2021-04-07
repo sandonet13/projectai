@@ -3,6 +3,7 @@
         <div class="page-title clearfix mt15">
             <h1><?php echo get_invoice_id($invoice_info->id); ?>
                 <?php
+                var_dump($can_edit_invoices);
                 if ($invoice_info->recurring) {
                     $recurring_status_class = "text-primary";
                     if ($invoice_info->no_of_cycles_completed > 0 && $invoice_info->no_of_cycles_completed == $invoice_info->no_of_cycles) {
