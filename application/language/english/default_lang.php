@@ -5,6 +5,15 @@
 /* language locale */
 $lang["language_locale"] = "en"; //locale code
 $lang["language_locale_long"] = "en-US"; //long locale code
+$lang["no"] = "No"; //long locale code
+
+
+/*Item MR*/
+$lang["edit_item_material_request"] = "Edit Item";
+$lang["delete_item_material_request"] = "Delete Item";
+$lang["close"] = "Close";
+$lang["cancel"] = "Cancel";
+
 
 /* common */
 $lang["add"] = "Add";

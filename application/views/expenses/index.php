@@ -68,7 +68,7 @@
                 {title: '<?php echo lang("amount") ?>', "class": "text-right"},
                 {title: '<?php echo lang("qty") ?>', "class": "text-right"},
                 {title: '<?php echo lang("total") ?>', "class": "text-right"}
-<?php echo $custom_field_headers; ?>,
+                <?php echo $custom_field_headers; ?>,
                 {title: '<i class="fa fa-bars"></i>', "class": "text-center option w100"}
             ],
             printColumns: [1, 2, 3, 4, 6, 7, 8, 9],

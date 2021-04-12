@@ -1,17 +1,17 @@
-<?php echo form_open(get_uri("add_material_request/save_item"), array("id" => "expense-form", "class" => "general-form", "role" => "form")); ?>
+<?php echo form_open(get_uri("add_material_request/save_item_modal"), array("id" => "expense-form", "class" => "general-form", "role" => "form")); ?>
 <div id="expense-dropzone" class="post-dropzone">
     <div class="modal-body clearfix">
-        
-        <div class="form-group">
-            <label for="no" class=" col-md-3"><?php echo lang('no'); ?></label>
+        <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
+        <div class="form-group" hidden>
+            <label for="mr_no" class=" col-md-3"><?php echo lang('mr_no'); ?></label>
             <div class=" col-md-9">
                 <?php
                 echo form_input(array(
-                    "id" => "no",
-                    "name" => "no",
-                    "value" => $model_info->no,
+                    "id" => "mr_no",
+                    "name" => "mr_no",
+                    "value" => $model_info->mr_no,
                     "class" => "form-control",
-                    "placeholder" => lang('no'),
+                    "placeholder" => lang('mr_no'),
                     //"autofocus" => true,
                     //"data-rich-text-editor" => true,
                     "data-rule-required" => true,
@@ -66,7 +66,7 @@
                 <?php
                 echo form_input(array(
                     "id" => "measurement",
-                    "name" => "qty",
+                    "name" => "measurement",
                     "value" => $model_info->qty,
                     "class" => "form-control",
                     "placeholder" => lang('measurement'),
@@ -110,8 +110,8 @@
                     "placeholder" => lang('notes'),
                     //"autofocus" => true,
                     "data-rich-text-editor" => true,
-                    "data-rule-required" => true,
-                    "data-msg-required" => lang("field_required"),
+                    // "data-rule-required" => true,
+                    // "data-msg-required" => lang("field_required"),
                 ));
                 ?>
             </div>
@@ -145,8 +145,6 @@
             },
 
         });
-
-        setDatePicker("#date_request");
 
         $("#expense-form .select2").select2();
         

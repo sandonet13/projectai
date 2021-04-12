@@ -2,7 +2,7 @@
 
 class Add_material_request_model extends Crud_model {
 
-    private $table = null;
+    public $table = null;
 
     function __construct() {
         $this->table = 'add_material_request';
@@ -21,6 +21,7 @@ class Add_material_request_model extends Crud_model {
         //$clients_table = $this->db->dbprefix('clients');
         $location_categories_table = $this->db->dbprefix('location_categories');
         $add_material_request_table = $this->db->dbprefix('add_material_request');
+        $add_item_material_request_table = $this->db->dbprefix('add_item');
         // = $this->db->dbprefix('measurement');
 
 
@@ -160,5 +161,13 @@ class Add_material_request_model extends Crud_model {
 
     //     return $this->db->query($sql);
     // }
+    
+ public function upddata($data) {
+        $add_material_request_table = $this->db->dbprefix('add_material_request');
+        $this->db->where('mr_no', $data['mr_no']);
+        $this->db->where('status_id', $data['status_id']);
+        $query = $this->db->update($add_material_request_table ,array('status_id' => 1));
+        return true;
+  }
 
 }

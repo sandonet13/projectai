@@ -2,9 +2,11 @@
 <div id="expense-dropzone" class="clearfix p21">
             <div class="panel">
                 <div class="panel-default panel-heading">
-                    <h4><?php echo lang("add_material_request"); ?></h4>
+                    <h4><?php echo lang("add_material_request"); ?></h4></br></br>
+                                        <span class="fa fa-plus-circle"></span><a data-toggle="collapse" href="#form"> Add Material Request</a>
                 </div>
                 <div class="panel-body">
+        <div id="form" class="panel-collapse collapse">
                 <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />   
                 <div class=" form-group">
                     <label for="date_request" class=" col-md-3"><?php echo lang('date_request'); ?></label>
@@ -80,7 +82,7 @@
         </div>
     </div>
                 </div>
-                
+                </div>
             </div>
             
     </div>

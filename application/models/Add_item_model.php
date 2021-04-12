@@ -13,6 +13,7 @@ class Add_item_model extends Crud_model {
 
     function get_details($options = array()) {
     $add_item_table = $this->db->dbprefix('add_item');
+    //$add_material_request_table = $this->db->dbprefix('add_material_request');
 
         $where = "";
         $id = get_array_value($options, "id");
@@ -21,7 +22,7 @@ class Add_item_model extends Crud_model {
         }
         
 
-        $sql = "SELECT $add_item_table.*,
+        $sql = "SELECT $add_item_table.*
         FROM $add_item_table
         WHERE $add_item_table.deleted=0 $where";
         return $this->db->query($sql);
