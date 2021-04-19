@@ -66,3 +66,5 @@ ERROR - 2021-04-12 10:01:52 --> Severity: Notice --> Undefined variable: id /hom
 ERROR - 2021-04-12 10:01:52 --> Severity: Notice --> Undefined variable: id /home/ubuntu/environment/application/controllers/Add_material_request.php 313
 ERROR - 2021-04-12 10:01:52 --> Severity: Notice --> Undefined variable: id /home/ubuntu/environment/application/controllers/Add_material_request.php 313
 ERROR - 2021-04-12 10:09:28 --> Severity: Notice --> Undefined property: stdClass::$status_id /home/ubuntu/environment/application/views/add_material_request/add_item.php 3
+ERROR - 2021-04-12 10:23:33 --> 404 Page Not Found: Manager/html
+ERROR - 2021-04-12 10:33:58 --> 404 Page Not Found: Hudson/index
