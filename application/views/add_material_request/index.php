@@ -1,6 +1,6 @@
 <?php echo form_open(get_uri("add_material_request/save"), array("id" => "expense-form", "class" => "general-form", "role" => "form")); ?>
 <div id="expense-dropzone" class="clearfix p21">
-            <div class="panel">
+            <div class="panel" <?php if($login_id == 17){ echo "hidden";}?>>
                 <div class="panel-default panel-heading">
                     <h4><?php echo lang("add_material_request"); ?></h4></br></br>
                                         <span class="fa fa-plus-circle"></span><a data-toggle="collapse" href="#form"> Add Material Request</a>
@@ -142,7 +142,7 @@
                 {title: '<?php echo lang("team") ?>'},
                 {title: '<?php echo lang("notes") ?>'},
                 {title: '<?php echo lang("status_mr") ?>'},
-                {title: 'Add Item'}
+                {title: 'Detail'}
             ],
             //printColumns: [1, 2, 3, 4, 6, 7, 8, 9],
             //xlsColumns: [1, 2, 3, 4, 6, 7, 8, 9],

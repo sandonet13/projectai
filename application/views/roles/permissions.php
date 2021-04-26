@@ -561,6 +561,7 @@
                         <label for="order_yes"><?php echo lang("yes"); ?></label>
                     </div>
                 </li>
+
                 <li>
                     <h5><?php echo lang("can_manage_help_and_knowledge_base"); ?></h5>
                     <div>
@@ -582,6 +583,30 @@
                                 ), $help_and_knowledge_base, ($help_and_knowledge_base === "all") ? true : false);
                         ?>
                         <label for="help_yes"><?php echo lang("yes"); ?></label>
+                    </div>
+                </li>
+    
+                    <li>
+                    <h5><?php echo lang("can_change_status_spv"); ?></h5>
+                    <div>
+                        <?php
+                        echo form_radio(array(
+                            "id" => "change_no_spv",
+                            "name" => "change_status_spv",
+                            "value" => "",
+                                ), $order, ($order === "") ? true : false);
+                        ?>
+                        <label for="change_no_spv"><?php echo lang("no"); ?> </label>
+                    </div>
+                    <div>
+                        <?php
+                        echo form_radio(array(
+                            "id" => "change_yes_spv",
+                            "name" => "change_status_spv",
+                            "value" => "all",
+                                ), $order, ($order === "all") ? true : false);
+                        ?>
+                        <label for="change_yes_spv"><?php echo lang("yes"); ?></label>
                     </div>
                 </li>
 

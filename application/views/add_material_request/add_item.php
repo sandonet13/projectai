@@ -1,3 +1,5 @@
+
+
 <?php echo form_open(get_uri("add_material_request/save_item_modal"), array("id" => "expense-form", "class" => "general-form", "role" => "form")); ?>
 <div id="expense-dropzone" class="post-dropzone">
     <div class="modal-body clearfix">
@@ -67,7 +69,7 @@
                 echo form_input(array(
                     "id" => "measurement",
                     "name" => "measurement",
-                    "value" => $model_info->qty,
+                    "value" => $model_info->measurement,
                     "class" => "form-control",
                     "placeholder" => lang('measurement'),
                     //"autofocus" => true,

@@ -2,6 +2,10 @@
 
 /* NOTE: DO NOT CHANGE THIS FILE. IF YOU WANT TO UPDATE THE LANGUAGE THEN COPY THIS FILE TO custom_lang.php AND UPDATE THERE */
 
+/*MR Roles*/
+$lang["can_change_status_spv"] = "Change MR Status SPV?";
+
+
 /* language locale */
 $lang["language_locale"] = "en"; //locale code
 $lang["language_locale_long"] = "en-US"; //long locale code
@@ -13,6 +17,8 @@ $lang["edit_item_material_request"] = "Edit Item";
 $lang["delete_item_material_request"] = "Delete Item";
 $lang["close"] = "Close";
 $lang["cancel"] = "Cancel";
+
+$lang["report_expense"] = "Report Expenses";
 
 
 /* common */

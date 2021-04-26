@@ -26,6 +26,12 @@
                              } if ($model_info->status_id == 2)
                              { 
                                  echo "<span class='label label-warning'>" . $status_warna[$model_info->status_id] . "</span>";
+                             } if ($model_info->status_id == 3)
+                             { 
+                                 echo "<span class='label label-success'>" . $status_warna[$model_info->status_id] . "</span>";
+                             }if ($model_info->status_id == 5)
+                             { 
+                                 echo "<span class='label label-danger'>" . $status_warna[$model_info->status_id] . "</span>";
                              }
                         
                         ?>
@@ -33,11 +39,20 @@
                         </li>
                         
                         <li class="list-group-item">
-                        <?php 
+                        <?php
                              if ($model_info->status_id == 2) { 
                                  echo "<input type='button' name='btn' value='Submit MR' class='btn btn-primary' id='submitBtn' data-toggle='modal' data-target='#confirm-submit' class='btn btn-default' />";
-                            }else{
-                                echo "<div class='p-3 mb-2 bg-info text-white' style='width:145px;'>MR has been submitted</div>";
+                            }
+                            if ($login_id == 12 && $model_info->status_id == 1) { 
+                                 echo "<input type='button' name='btn' value='Approve MR' class='btn btn-primary' id='submitBtn' data-toggle='modal' data-target='#confirm-approve' class='btn btn-default' />    ";
+                                 echo "<input type='button' name='btn' value='Reject MR' class='btn btn-danger' id='submitBtn' data-toggle='modal' data-target='#confirm-reject' class='btn btn-default' />";
+
+                            }if ($model_info->status_id == 3 || $model_info->status_id == 5) { 
+                                // echo "<div class='p-3 mb-2 bg-info text-white' style='width:145px;'>MR has been " . $status_warna[$model_info->status_id] ."</div>";
+                            }
+                            if ($login_id == 17) { 
+                                 echo "<input type='button' name='btn' value='Add PO' class='btn btn-primary' id='submitBtn' data-toggle='modal' data-target='#confirm-po' class='btn btn-default' />    ";
+                                 echo "<input type='button' name='btn' value='Void MR' class='btn btn-danger' id='submitBtn' data-toggle='modal' data-target='#confirm-void' class='btn btn-default' />";
                             }
                         
                         ?>
@@ -51,7 +66,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Confirm Submit
+                <h4>Confirm Submit</h4>
             </div>
             <div class="modal-body">
                 Are you sure you want to submit the following details? </br></br><strong><p class="bg-danger"></p>This action cannot be edited anymore, please make sure the item details has been inputed correctly.</p></strong>
@@ -72,9 +87,59 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirm-approve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Approve</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to approve the following MR? </br></br><strong><p class="bg-danger"></p>This action cannot be undo, please make sure the MR details is correctly.</p></strong>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="row">
+                    <button type="button" class="btn btn- col col-md-3" data-dismiss="modal">Cancel</button>
+                <form method="post">
+                                <button type="submit" value="apprmr" name="apprmr" class="btn btn-primary"><span class="fa fa-check-circle"></span> Approve MR</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-reject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Reject</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to reject the following MR? </br></br><strong><p class="bg-danger"></p>This action cannot be undo, please make sure you want to reject this MR.</p></strong>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="row">
+                    <button type="button" class="btn btn- col col-md-3" data-dismiss="modal">Cancel</button>
+                <form method="post">
+                                <button type="submit" value="rjcmr" name="rjcmr" class="btn btn-danger"><span class="fa fa-check-circle"></span> Reject MR</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php echo form_open(get_uri("add_material_request/save_item"), array("id" => "expense-form", "class" => "general-form", "role" => "form")); ?>
-<div id="expense-dropzone" class="clearfix p20" <?php if ($model_info->status_id == 1) {echo 'hidden';}?> >
+<div id="expense-dropzone" class="clearfix p20" <?php if ($model_info->status_id != 2) {echo 'hidden';}?> >
             <div class="panel">
                 <div class="panel-default panel-heading">
                                         <span class="fa fa-plus-circle"></span><a data-toggle="collapse" href="#form"> Add Item</a>
@@ -221,11 +286,18 @@
   <script type="text/javascript">
     loadExpensesTable = function (selector) {
         
-        $(selector).appTable({
+       var t = $(selector).appTable({
             source: '<?php echo_uri("add_material_request/list_data_item/$model_info->id") ?>/',
+            
             order: [[1, "asc"]],
+            columnDefs: [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
             columns: [
-                // {visible: false, searchable: false},
+                //{visible: true, searchable: false},
+                // {title: ''},
                 {title: '<?php echo lang("mr_no") ?>'},
                 {title: '<?php echo lang("item_name") ?>'},
                 {title: '<?php echo lang("specification") ?>'},
@@ -236,10 +308,12 @@
 
                 
             ],
-            //printColumns: [1, 2, 3, 4, 6, 7, 8, 9],
-            //xlsColumns: [1, 2, 3, 4, 6, 7, 8, 9],
+            printColumns: [1, 2, 3, 4, 6, 7, 8, 9],
+            xlsColumns: [1, 2, 3, 4, 6, 7, 8, 9],
             //summation: [{column: 8, dataType: 'currency'}, {column: 10, dataType: 'currency'}]
+            
         });
+            
     };
 
     $(document).ready(function () {
@@ -251,5 +325,7 @@
         $('[data-toggle="tooltip"]').tooltip();
         
         loadExpensesTable("#monthly-expense-table", "monthly");
+        
+
     });
 </script>

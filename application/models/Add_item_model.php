@@ -27,6 +27,14 @@ class Add_item_model extends Crud_model {
         WHERE $add_item_table.deleted=0 $where";
         return $this->db->query($sql);
     }
+    
+ public function upddata($data) {
+        $add_item_table = $this->db->dbprefix('add_item');
+        $this->db->where('mr_no', $data['mr_no']);
+        $this->db->where('status_id', $data['status_id']);
+        $query = $this->db->update($add_item_table ,array('status_id' => 1));
+        return true;
+  }
 
 
 }

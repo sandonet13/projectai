@@ -17,7 +17,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="monthly-expenses">
                 <div class="table-responsive">
-                    <table id="monthly-expense-table" class="display" cellspacing="0" width="100%">
+                <table id="monthly-expense-table" class="display" cellspacing="0" width="100%">-->
                     </table>
                 </div>
             </div>
@@ -28,7 +28,6 @@
         </div>
     </div>
 </div>
-
 
 <script type="text/javascript">
     loadExpensesTable = function (selector, dateRange) {
@@ -73,7 +72,7 @@
             ],
             printColumns: [1, 2, 3, 4, 6, 7, 8, 9],
             xlsColumns: [1, 2, 3, 4, 6, 7, 8, 9],
-            summation: [{column: 8, dataType: 'currency'}, {column: 10, dataType: 'currency'}]
+            summation: [{column: 10, dataType: 'currency'}]
         });
     };
 

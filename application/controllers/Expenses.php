@@ -130,6 +130,31 @@ class Expenses extends MY_Controller {
         $view_data["custom_fields"] = $this->Custom_fields_model->get_combined_details("expenses", $view_data['model_info']->id, $this->login_user->is_admin, $this->login_user->user_type)->result();
         $this->load->view('expenses/modal_form', $view_data);
     }
+    
+    function report_form() {
+        $mpdf = new \Mpdf\Mpdf();
+        //$html = $this->load->view('add_material_request/get_pdf',[],true);
+
+        $date = $this->input->post('date');
+            if ($date != "") {
+                $result = $this->Expenses_model->show_data_by_date($date);
+            
+            if ($result != false) {
+                $data['result_display'] = $result;
+            } else {
+                $data['result_display'] = "No record found !";
+            }
+            } else {
+            $data['date_error_message'] = "Date field is required";
+            }
+        $data['show_table'] = $this->view_table();
+        $this->load->view('expenses/expense_report', $data);
+        
+        $mpdf->WriteHTML('expenses/expense_report');
+        $mpdf->Output(); // opens in browser
+    }
+    
+    
 
     //save an expense
     function save() {
@@ -588,6 +613,33 @@ class Expenses extends MY_Controller {
 
         $this->load->view("expenses/expense_details", $view_data);
     }
+
+
+public function view_table(){
+    $result = $this->Expenses_model->show_all_data();
+        if ($result != false) {
+            return $result;
+        } else {
+            return 'Database is empty !';
+        }
+}
+
+// public function select_by_date() {
+//     $date = $this->input->post('date');
+//     if ($date != "") {
+//         $result = $this->Expenses_model->show_data_by_date($date);
+    
+//     if ($result != false) {
+//         $data['result_display'] = $result;
+//     } else {
+//         $data['result_display'] = "No record found !";
+//     }
+//     } else {
+//     $data['date_error_message'] = "Date field is required";
+//     }
+// $data['show_table'] = $this->view_table();
+// $this->load->view('expenses/expense_report', $data);
+// }
 
 }
 

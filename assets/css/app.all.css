@@ -7,6 +7,15 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td.child,table.dataTable.dtr-inlin
  * Improvements by Andrew Rowls
  * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
  */
+ 
+.table{
+  margin-left: auto; 
+  margin-right: auto;
+} 
+ 
+ 
+ 
+ 
 .datepicker {
   border-radius: 4px;
   direction: ltr;

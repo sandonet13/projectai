@@ -67,6 +67,7 @@ class roles extends MY_Controller {
             $view_data['can_manage_all_projects'] = get_array_value($permissions, "can_manage_all_projects");
             $view_data['can_create_projects'] = get_array_value($permissions, "can_create_projects");
             $view_data['can_edit_projects'] = get_array_value($permissions, "can_edit_projects");
+            $view_data['add_material_request'] = get_array_value($permissions, "can_change_status_spv");
             $view_data['can_delete_projects'] = get_array_value($permissions, "can_delete_projects");
 
             $view_data['can_add_remove_project_members'] = get_array_value($permissions, "can_add_remove_project_members");
@@ -156,6 +157,7 @@ class roles extends MY_Controller {
         $order = $this->input->post('order_permission');
         $client = $this->input->post('client_permission');
         $lead = $this->input->post('lead_permission');
+        $change_spv = $this->input->post('change_status_spv');
 
 
         $ticket = $this->input->post('ticket_permission');
@@ -221,6 +223,7 @@ class roles extends MY_Controller {
             "estimate" => $estimate,
             "expense" => $expense,
             "order" => $order,
+            "change_spv" => $change_spv,
             "client" => $client,
             "lead" => $lead,
             "ticket" => $ticket,
